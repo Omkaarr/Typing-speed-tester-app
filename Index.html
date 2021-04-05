@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="TDF-8">
+    <title>Mini Project</title>
+    <link rel="stylesheet"href="mdb/css/bootstrap.css">
+    <link rel="stylesheet"href="mdb/css/mdb.css">
+    <script src="fontawesome/kitcode.js"></script>
+    <style>
+ body{
+    font-family: 'Arial Unicode MS', sans-serif;
+    margin: 0;
+    }
+
+.main-header{
+    font-family: 'Ubuntu', sans-serif;
+    background-color:#0E0C0A;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 0.8em;
+    position: sticky;
+    top:0px;
+    z-index: 5;
+}
+.container-fluid
+{
+    top :66px;
+    margin-bottom: 3%;
+}
+
+.text-section{
+    margin: 50px auto auto auto; /* place center */
+    max-width: 750px;
+    background-color: #E1DFDD;
+    padding: 15px;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 10px;
+    box-shadow:  0 0 15px black;
+}
+.text-section p{
+    margin: 0;
+}
+
+.text-area-section{
+    text-align: center;
+}
+.text-area-div{
+    margin: auto; /* place center */
+    max-width: 750px;
+}
+
+#text-area{
+    border: 10px solid gray;
+    border-radius: 20px;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+#text-area:focus{
+    outline: none;
+}
+
+.result-section {
+    margin-bottom: 20px;
+}
+
+.result-section-div{
+    margin: 0 auto; /* place center */
+    max-width: 750px;
+}
+
+.result-section-div span{
+    font-size: 40px;
+}
+
+.result-section-div button{
+    display: block;
+    margin: 20px auto;
+    background-color: orangered;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 200px;
+    box-shadow:  0 0 15px black;
+}
+
+.result-section-div button:hover{
+    background-color: red;
+}
+
+.timer{
+    font-family: "comic sans ms",sans-serif;
+}
+#minutes,#seconds,#m-seconds{
+    font-size: 50px;
+    font-family: "comic sans ms",sans-serif;
+    text-shadow: 2px 2px green;
+}
+
+.cong-section{
+    margin: auto; /* place center */
+    max-width: 750px;
+    background-color: limegreen;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 35px;
+    border-radius: 50px;
+    box-shadow: 0 0 10px black;
+    display: none; /* --------- to hide this ---- */
+}
+
+.cong-section-div p{
+    margin: 0;
+}
+
+.cong-section-div{
+    margin: 0 auto; /* place center */
+    max-width: 750px;
+}
+#reset
+{
+    border-radius: 35px;
+}
+footer{
+    background-color: #0E0C0A;
+    color: white;
+    text-align: center;
+    font-size: 0.7em;
+}
+footer p {
+    margin: 0px;
+}
+
+footer small{
+    color: orangered;
+}
+
+#minutes , #seconds , #m-seconds{
+    color: red;
+}
+
+.t-card{
+    border-radius: 10px;
+    box-shadow: 0 0 10px blueviolet !important;
+}
+    </style>
+</head>
+<body>
+
+<audio id="clap-sound">
+    <source src="sounds/clap.wav" type="audio/wav">
+</audio>
+
+<audio id="congrats-sound">
+    <source src="sounds/congrats.wav" type="audio/wav">
+</audio>
+
+<!-- MAIN HEADER -->
+<header class="main-header">
+    <h1>Typing Teacher App</h1>
+</header>
+
+<div class="container-fluid" id="nav">
+    <div class="row">
+       <div class="col-md-3 mt-4">
+            <section class="side-2-section">
+                <button class="btn btn-primary btn-block mt-2" onclick="changeText(0)">Lesson 1</button>
+                <button class="btn btn-success btn-block mt-2" onclick="changeText(1)">Lesson 2</button>
+                <button class="btn btn-warning btn-block mt-2" onclick="changeText(2)">Lesson 3</button>
+                <button class="btn btn-danger btn-block mt-2" onclick="changeText(3)">Lesson 4</button>
+                <button class="btn btn-indigo btn-block mt-2" onclick="changeText(4)">Lesson 5</button>
+                <button class="btn btn-pink btn-block mt-2" onclick="changeText(5)">Lesson 6</button>
+                <button class="btn btn-purple btn-block mt-2" onclick="changeText(6)">Lesson 7</button>
+                <button class="btn btn-secondary btn-block mt-2" onclick="changeText(7)">Lesson 8</button>
+                <button class="btn btn-primary btn-block mt-2" onclick="changeText(8)">Lesson 9</button>
+                <button class="btn btn-success btn-block mt-2" onclick="changeText(9)">Lesson 10</button>
+            </section>
+        </div>
+         <div class="col-md-9 mt-3">
+            <div class="card t-card">
+                <div class="card-body">
+                    <section class="side-1-section">
+                        <section class="text-section">
+                            <div class="text-section-div">
+                                <p id="original-text">Thanks for Learning UI Technologies.</p>
+                            </div>
+                        </section>
+
+                        <br>
+                        <section class="text-area-section">
+                            <div class="text-area-div">
+                                <!-- Disable Paste Option -->
+                                <textarea class="col-lg-12 col-md-12 col-sm-12" onpaste="return false" id="text-area" rows="4" cols="53" placeholder="The Clock starts when you starts typing.."></textarea>
+                            </div>
+                        </section>
+
+                        <br>
+                        <section class="result-section">
+                            <div class="result-section-div">
+                        <span class="timer">
+                            <span id="minutes">00</span> Min
+                            <span id="seconds">00</span> sec
+                            <span id="m-seconds">00</span> ms
+                        </span>
+                                <div>
+                                    <button type="button" id="reset">Reset</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Congratulations Section -->
+                        <section class="cong-section">
+                            <div class="cong-section-div">
+                                <p>Congratulations !!</p>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <h6>Copyright &copy; 2021 Omkaarr.com</h6>
+    <p>All Rights Reserved</p>
+    <small>Developed & Maintained by Omkaarr</small>
+</footer>
+<script>
+    let lessonsArray = ["Let us now look deep into what are objects. If we consider the real-world, we can find many objects around us, cars, dogs, humans, etc. All these objects have a state and a behavior.","If we consider a dog, then its state is - name, breed, color, and the behavior is - barking, wagging the tail, running.","If you compare the software object with a real-world object, they have very similar characteristics.","Software objects also have a state and a behavior. A software object's state is stored in fields and behavior is shown via methods.","So in software development, methods operate on the internal state of an object and the object-to-object communication is done via methods.","A class can have any number of methods to access the value of various kinds of methods. In the above example, barking(), hungry() and sleeping() are methods.","Following are some of the important topics that need to be discussed when looking into classes of the Java Language.","A collections framework is a unified architecture for representing and manipulating collections. All collections frameworks contain the following","In addition to collections, the framework defines several map interfaces and classes. Maps store key/value pairs. Although maps are not collections in the proper use of the term, but they are fully integrated with collections.","A constructor initializes an object when it is created. It has the same name as its class and is syntactically similar to a method. However, constructors have no explicit return type."];
+let originalTextTag=document.querySelector('#original-text');
+let textAreaBoxTag=document.querySelector('#text-area');
+let secondsTag=document.querySelector('#seconds');
+let minutesTag=document.querySelector('#minutes');
+let milliSecondsTag=document.querySelector('#m-seconds');
+let minutes=0;
+let seconds=0;
+let milliSeconds=0;
+let count=0;
+let timerRunning=false;
+let congratsSection=document.querySelector('.cong-section');
+let interval=null;
+
+
+//start Timer
+
+let startTimer=()=>
+{
+
+    count++;
+    minutes=Math.floor((count/100)/60);
+    seconds=Math.floor((count/100)-(minutes*60));
+    milliSeconds=Math.floor(count-(seconds*100)-(minutes*6000));
+
+    minutesTag.innerText=leadingZero(minutes);
+    secondsTag.innerText=leadingZero(seconds);
+    milliSecondsTag.innerText=leadingZero(milliSeconds);
+}
+
+//leading Zero
+
+let leadingZero=(time)=>
+{
+    if(time<10)
+    {
+        return '0'+time;
+    }
+    else
+    {
+        return time;
+    }
+}
+
+textAreaBoxTag.addEventListener('keyup',function()
+{
+    let textEnteredLength=textAreaBoxTag.value.length;
+    if(textEnteredLength=== 1 && !timerRunning)
+    {
+        //start timer
+        //startTimer();
+        interval=setInterval(startTimer,10);
+        timerRunning=true;
+
+    }
+    let originalText=originalTextTag.innerText;
+    let textEntered=textAreaBoxTag.value;
+    let partialText=originalText.substr(0,textEntered.length);
+    evaluateText(originalText,textEntered,partialText);
+});
+
+//evaluate Text
+
+let evaluateText=(originalText,textEntered,partialText)=>
+{
+    if(textEntered==='')
+    {
+        //grey
+        applyColors('grey');
+    }
+    else
+    {
+        if(originalText===textEntered)
+    {
+        //green
+        applyColors('green');
+        congratsSection.style.display='block';
+        clearInterval(interval);
+    }
+    else
+    {
+        if(textEntered===partialText)
+        {
+            //blue
+            applyColors('blue');
+        }
+        else
+        {
+            //red
+            applyColors('red');
+        }
+    }
+    }
+}
+
+//apply colors
+
+let applyColors=(color)=>
+{
+    textAreaBoxTag.style.borderColor=color;
+    textAreaBoxTag.style.boxShadow=`0 0 10px ${color}`;
+}
+
+
+//change Text
+
+let changeText=(index)=>
+{
+    let lessonText=lessonsArray[index];
+    originalTextTag.innerText=lessonText;
+}
+</script>
+</body>
+</html>
