@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="TDF-8">
-    <title>Mini Project</title>
+    <title>Typing Speed Tester</title>
     <link rel="stylesheet"href="mdb/css/bootstrap.css">
     <link rel="stylesheet"href="mdb/css/mdb.css">
     <script src="fontawesome/kitcode.js"></script>
@@ -129,6 +129,7 @@
 #reset
 {
     border-radius: 35px;
+    outline: none;
 }
 footer{
     background-color: #0E0C0A;
@@ -212,7 +213,7 @@ footer small{
                             <span id="m-seconds">00</span> ms
                         </span>
                                 <div>
-                                    <button type="button" id="reset">Reset</button>
+                                    <button type="button" id="reset" onclick="reset()">Reset</button>
                                 </div>
                             </div>
                         </section>
@@ -256,7 +257,6 @@ let interval=null;
 
 let startTimer=()=>
 {
-
     count++;
     minutes=Math.floor((count/100)/60);
     seconds=Math.floor((count/100)-(minutes*60));
@@ -266,7 +266,20 @@ let startTimer=()=>
     secondsTag.innerText=leadingZero(seconds);
     milliSecondsTag.innerText=leadingZero(milliSeconds);
 }
+// Reset Timer
+let reset=()=>
+{
+    document.getElementById("text-area").value = "";
+    window.location.reload();
+    clearInterval(interval);
+    minutes=0;
+    seconds=0;
+    milliSeconds=0;
 
+    minutesTag.innerText=leadingZero(minutes);
+    secondsTag.innerText=leadingZero(seconds);
+    milliSecondsTag.innerText=leadingZero(milliSeconds);
+}
 //leading Zero
 
 let leadingZero=(time)=>
